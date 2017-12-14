@@ -13,14 +13,14 @@ import java.io.InputStreamReader;
  *
  * @author rioswarawan
  */
-public class Calculator {
+public class Calculator implements CalculateListener {
     
     private BufferedReader reader;
     private CalculatorPresenter presenter;
     
     public Calculator() {
         reader = new BufferedReader(new InputStreamReader(System.in));
-        presenter = new CalculatorPresenter(listener2);
+        presenter = new CalculatorPresenter(this);
     }
     
     public void show() {
@@ -51,18 +51,9 @@ public class Calculator {
             System.out.println("Selesai");
         }
     }
-    
-    private CalculateListener listener = new CalculateListener() {
-        @Override
-        public void onResult(String result) {
-            System.out.println(String.format("Hasil: %s ", result));
-        }
-    };
-    
-    private CalculateListener listener2 = new CalculateListener() {
-        @Override
-        public void onResult(String result) {
-            System.out.println("Hasilnya banyak~");
-        }
-    };
+
+    @Override
+    public void onResult(String result) {
+        System.out.println("Hasil : " + result);
+    }
 }
